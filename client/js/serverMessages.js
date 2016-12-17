@@ -27,8 +27,16 @@ export default function serverMessages(game) {
     });
 
     game.socket.on('newAppleGenerated', apple => {
-        console.log('new apple', apple);
+        game.emit('newAppleGenerated', apple);
     });
+
+    game.socket.on('moveSnake', data => {
+        game.emit('moveSnake', data);
+    });
+
+    game.socket.on('snakeWithAppleCollision', data => {
+        game.emit('snakeWithAppleCollision', data);
+    })
 
 }
 

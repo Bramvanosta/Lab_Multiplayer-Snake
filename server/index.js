@@ -41,7 +41,12 @@ io.on('connection', socket => {
 
         socket.emit('newPlayerCreated', newPlayer);
         socket.broadcast.emit('newPlayerJoined', newPlayer);
-    })
+    });
+
+    socket.on('changeDirection', data => {
+        board.changeDirection(data.playerId, data.direction);
+    });
+
 });
 
 http.listen(3000, () => {
@@ -50,4 +55,6 @@ http.listen(3000, () => {
 
 setInterval(() => {
     board.checkNumberOfApples(io);
+    board.moveSnakes(io);
+    board.checkCollisionWithApples(io);
 }, config.DELAY);

@@ -24,4 +24,8 @@ export default class Game extends EventEmitter {
         this.socket.emit('registerNewPlayer', name);
     }
 
+    changeDirection(playerId, direction) {
+        this.socket.emit('changeDirection', {playerId: playerId, direction: direction});
+    }
+
 }

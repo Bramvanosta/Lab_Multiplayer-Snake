@@ -50,6 +50,20 @@ export default class Board {
         });
     }
 
+    moveSnakes(io) {
+        this.players.forEach(player => {
+            player.snake.updateSnakeCoordinates();
+            io.emit('moveSnake', {playerId: player.id, direction: player.snake.direction});
+        })
+    }
+
+    changeDirection(id, direction) {
+        let playerToChangeDirection = this.players.filter(player => {
+            return player.id === id;
+        });
+        playerToChangeDirection[0].snake.direction = direction;
+    }
+
     checkNumberOfApples(io) {
         while (this.apples.length < config.MAX_APPLES_ON_FIELD) {
             let apple = this.addApple();
@@ -62,5 +76,25 @@ export default class Board {
         this.apples.push(apple);
 
         return apple;
+    }
+
+    removeAppleFromArray(index) {
+        this.apples.splice(index, 1);
+    }
+
+    checkCollisionWithApples(io) {
+        this.players.forEach(player => {
+            this.apples.forEach((apple, index) => {
+                if (player.snake.x < apple.x + apple.radius * 2 &&
+                    player.snake.x + config.SNAKE_WIDTH > apple.x &&
+                    player.snake.y < apple.y + apple.radius * 2 &&
+                    config.SNAKE_HEIGHT + player.snake.y > apple.y) {
+
+                    this.removeAppleFromArray(index);
+
+                    io.emit('snakeWithAppleCollision', {playerId: player.id, x: apple.x, y: apple.y});
+                }
+            });
+        });
     }
 }
