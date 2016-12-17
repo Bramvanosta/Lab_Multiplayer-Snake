@@ -6,6 +6,7 @@ const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
+import * as config from '../client/js/config';
 import Board from '../client/js/board';
 
 app.use(express.static(path.join(__dirname, '..', 'client')));
@@ -30,6 +31,10 @@ io.on('connection', socket => {
         socket.emit('listWithPlayers', board.players);
     });
 
+    socket.on('askForApples', () => {
+        socket.emit('listWithApples', board.apples);
+    });
+
     socket.on('registerNewPlayer', userName => {
         let userColor = board.getAvailableColor();
         let newPlayer = board.addPlayer(socket.id, userName, userColor);
@@ -42,3 +47,7 @@ io.on('connection', socket => {
 http.listen(3000, () => {
     console.log('listening on *:3000');
 });
+
+setInterval(() => {
+    board.checkNumberOfApples(io);
+}, config.DELAY);

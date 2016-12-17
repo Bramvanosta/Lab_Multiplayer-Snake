@@ -14,13 +14,21 @@ export default function serverMessages(game) {
         game.emit('listWithPlayers', players);
     });
 
+    game.socket.on('listWithApples', apples => {
+        game.emit('listWithApples', apples);
+    });
+
     game.socket.on('newPlayerCreated', player => {
         game.emit('newPlayerCreated', player);
     });
 
     game.socket.on('newPlayerJoined', player => {
         game.emit('newPlayerJoined', player);
-    })
+    });
+
+    game.socket.on('newAppleGenerated', apple => {
+        console.log('new apple', apple);
+    });
 
 }
 

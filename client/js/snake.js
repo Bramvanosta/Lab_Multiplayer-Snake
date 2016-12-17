@@ -8,7 +8,7 @@ export default class Snake {
     constructor(context, color, x, y) {
         this.context = context;
 
-        this.x = x !== undefined ? x : this.x = Math.floor(Math.random() * (config.CANVAS_WIDTH / config.GRID_SIZE)) * config.GRID_SIZE;
+        this.x = x !== undefined ? x : Math.floor(Math.random() * (config.CANVAS_WIDTH / config.GRID_SIZE)) * config.GRID_SIZE;
         this.y = y !== undefined ? y : Math.floor(Math.random() * (config.CANVAS_HEIGHT / config.GRID_SIZE)) * config.GRID_SIZE;
         this.direction = 'right';
 

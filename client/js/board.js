@@ -2,11 +2,13 @@
 
 import * as config from './config';
 import Player from './player';
+import Apple from './apple';
 
 export default class Board {
 
     constructor() {
         this.players = [];
+        this.apples = [];
     }
 
     instantiateCanvas() {
@@ -46,5 +48,19 @@ export default class Board {
                 return true;
             }
         });
+    }
+
+    checkNumberOfApples(io) {
+        while (this.apples.length < config.MAX_APPLES_ON_FIELD) {
+            let apple = this.addApple();
+            io.emit('newAppleGenerated', apple);
+        }
+    }
+
+    addApple(x, y) {
+        let apple = new Apple(this.context, x, y);
+        this.apples.push(apple);
+
+        return apple;
     }
 }

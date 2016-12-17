@@ -22,12 +22,21 @@ document.addEventListener('DOMContentLoaded', function () {
             let name = document.getElementById('username').value;
 
             game.askForPlayers();
+            game.askForApples();
 
             game.on('listWithPlayers', players => {
                 console.log('old players', players);
                 players.forEach(player => {
                     let localPlayer = board.addPlayer(player.id, player.name, player.color, player.snake.x, player.snake.y);
                     localPlayer.drawSnake();
+                });
+            });
+
+            game.on('listWithApples', apples => {
+                console.log('old apples', apples);
+                apples.forEach(apple => {
+                    let localApple = board.addApple(apple.x, apple.y);
+                    localApple.draw();
                 });
             });
 

@@ -7,6 +7,7 @@ export const CANVAS_HEIGHT = 690;
 export const GRID_SIZE = 30;
 
 // GAME CONFIG
+export const DELAY = 150;
 export const MAX_APPLES_ON_FIELD = 5;
 export const COLORS = [
     '#468966',

@@ -16,6 +16,10 @@ export default class Game extends EventEmitter {
         this.socket.emit('askForPlayers');
     }
 
+    askForApples() {
+        this.socket.emit('askForApples');
+    }
+
     registerPlayer(name) {
         this.socket.emit('registerNewPlayer', name);
     }
