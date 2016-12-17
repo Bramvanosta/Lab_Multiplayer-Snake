@@ -1,0 +1,40 @@
+{
+  "name": "multiplayer-snake",
+  "version": "0.0.1",
+  "description": "A simple multiplayer snake in JS",
+  "main": "index.html",
+  "scripts": {
+    "bundle": "webpack",
+    "dev": "webpack --watch",
+    "serve": "nodemon --exec npm run babel-node server/index.js",
+    "babel-node": "babel-node --presets=es2015"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bramvanosta/Multiplayer-Snake.git"
+  },
+  "author": "Bram van Osta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bramvanosta/Multiplayer-Snake/issues"
+  },
+  "homepage": "https://github.com/Bramvanosta/Multiplayer-Snake#readme",
+  "devDependencies": {
+    "eslint-loader": "^1.6.1",
+    "webpack-dashboard": "^0.2.0",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-latest": "^6.16.0",
+    "eslint": "^3.12.2",
+    "event-emitter": "^0.3.4",
+    "event-emitter-es6": "^1.1.5",
+    "express": "^4.14.0",
+    "nodemon": "^1.11.0",
+    "npm-run-all": "^3.1.2",
+    "socket.io": "^1.7.2",
+    "webpack": "^1.14.0"
+  }
+}

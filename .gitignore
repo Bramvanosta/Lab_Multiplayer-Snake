@@ -1,0 +1,9 @@
+# NPM and Node
+node_modules
+npm-debug.log
+
+# Generated files
+client/dist
+
+# IDEA
+.idea

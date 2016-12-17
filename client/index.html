@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <title>Multiplayer Snake</title>
+    <meta name="description" content="Simple multiplayer snake game"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="dist/main.bundle.js" defer></script>
+</head>
+
+<body>
+<h1 class="app-title">Multiplayer Snake</h1>
+
+<section id="loader">
+    <div class="loader">
+        <div class="sy"></div>
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+        <div class="s6"></div>
+        <div class="s7"></div>
+        <div class="s8"></div>
+        <div class="s9"></div>
+        <div class="s10"></div>
+        <div class="s11"></div>
+        <div class="s12"></div>
+        <div class="s13"></div>
+        <div class="s14"></div>
+        <div class="s15"></div>
+        <div class="s16"></div>
+    </div>
+    <p class="loader-connecting">Connecting...</p>
+</section>
+
+<section id="login" class="is-hidden">
+    <form id="login-form" action="">
+        <label for="username">Choose a name :</label>
+        <input type="text" id="username" name="username" placeholder="Username" autocomplete="username" required>
+        <button>Start Game</button>
+    </form>
+</section>
+
+<section id="board" class="is-hidden">
+    <canvas id="canvas"></canvas>
+
+    <div id="scoreboard">
+        <h2>ScoreBoard :</h2>
+    </div>
+</section>
+
+</body>
+
+</html>
