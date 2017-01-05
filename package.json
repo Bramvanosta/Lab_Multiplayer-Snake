@@ -4,9 +4,8 @@
   "description": "A simple multiplayer snake in JS",
   "main": "index.html",
   "scripts": {
-    "bundle": "webpack",
+    "build": "webpack",
     "dev": "webpack --watch",
-    "serve": "nodemon --exec npm run babel-node server/index.js",
     "babel-node": "babel-node --presets=es2015",
     "start": "nodemon --exec npm run babel-node server/index.js"
   },
