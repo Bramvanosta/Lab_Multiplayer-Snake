@@ -13,8 +13,12 @@ export default class Player {
         this.snake = new Snake(context, color, startX, startY);
     }
 
-    drawSnake() {
+    createSnake() {
         this.snake.createSnake();
+    }
+
+    drawSnake() {
+        this.snake.drawSnake();
     }
 
     removeSnake() {

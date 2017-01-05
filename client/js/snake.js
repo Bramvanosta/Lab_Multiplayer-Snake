@@ -18,10 +18,13 @@ export default class Snake {
     }
 
     createSnake() {
-        let firstBodyPart = this.addBodyPart();
         this.addBodyPart();
         this.addBodyPart();
+        this.addBodyPart();
+    }
 
+    drawSnake() {
+        let firstBodyPart = this.bodyParts[0];
         firstBodyPart.draw();
     }
 
@@ -119,6 +122,17 @@ export default class Snake {
             if (this.x >= config.CANVAS_WIDTH) {
                 this.x = 0;
             }
+            let lastBodyPart = this.bodyParts[this.bodyParts.length - 1];
+            let firstBodyPart = this.bodyParts[0];
+
+            lastBodyPart.y = firstBodyPart.y;
+            lastBodyPart.x = firstBodyPart.x + config.SNAKE_WIDTH + config.BODY_PART_MARGIN;
+
+            if (lastBodyPart.x >= config.CANVAS_WIDTH) {
+                lastBodyPart.x = 0;
+            }
+
+            this.moveBodyPartsInArray();
         }
         else if (this.direction === 'down') {
             this.y = this.y + config.SNAKE_HEIGHT + config.BODY_PART_MARGIN;

@@ -92,6 +92,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 playerToAddScore[0].snake.addBodyPart();
             });
 
+            game.on('snakeCollision', data => {
+                console.log('snake collision');
+                board.players.forEach((player, index) => {
+                    if (player.id === data.id) {
+                        board.removePlayerFromArray(index);
+                        player.removeSnake();
+                        document.removeEventListener('keydown');
+                    }
+                });
+            });
+
+            game.on('selfCollision', data => {
+                console.log('self collision');
+                board.players.forEach((player, index) => {
+                    if (player.id === data.id) {
+                        board.removePlayerFromArray(index);
+                        player.removeSnake();
+                        document.removeEventListener('keydown');
+                    }
+                });
+            });
+
             document.addEventListener('keydown', event => {
                 if (event.keyCode === 37 && localPlayer.snake.direction !== 'right') {
                     game.changeDirection(localPlayer.id, 'left');
