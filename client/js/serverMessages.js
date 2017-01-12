@@ -42,9 +42,5 @@ export default function serverMessages(game) {
         game.emit('snakeCollision', data);
     })
 
-    game.socket.on('selfCollision', data => {
-        game.emit('selfCollision', data);
-    })
-
 }
 

@@ -54,7 +54,7 @@ export default class Board {
     moveSnakes(io) {
         this.players.forEach(player => {
             player.snake.updateSnakeCoordinates();
-            io.emit('moveSnake', {playerId: player.id, direction: player.snake.direction});
+            io.emit('moveSnake', {playerId: player.id, snake: player.snake});
         })
     }
 
@@ -108,39 +108,22 @@ export default class Board {
     checkCollisionWithSnakes(io) {
         this.players.forEach((playerToCheckCollision, index) => {
             this.players.forEach((playerToCheckCollisionWith) => {
-                playerToCheckCollisionWith.snake.bodyParts.forEach(bodyPart => {
+                playerToCheckCollisionWith.snake.bodyParts.forEach((bodyPart, bodyPartIndex) => {
+                    if (playerToCheckCollision.id === playerToCheckCollisionWith.id && bodyPartIndex === 0) {
+                        return;
+                    }
+
                     if (playerToCheckCollision.snake.x < bodyPart.x + config.SNAKE_WIDTH &&
                         playerToCheckCollision.snake.x + config.SNAKE_WIDTH > bodyPart.x &&
                         playerToCheckCollision.snake.y < bodyPart.y + config.SNAKE_HEIGHT &&
-                        config.SNAKE_HEIGHT + playerToCheckCollision.snake.y > bodyPart.y &&
-                        playerToCheckCollision.id !== playerToCheckCollisionWith.id) {
-
+                        config.SNAKE_HEIGHT + playerToCheckCollision.snake.y > bodyPart.y) {
+            
                         this.removePlayerFromArray(index);
 
                         io.emit('snakeCollision', {playerId: playerToCheckCollision.id});
                     }
                 })
             })
-        })
-    }
-
-    checkCollisionWithSelf(io) {
-        this.players.forEach((player, i) => {
-			player.snake.bodyParts.forEach((bodyPart, index) => {
-				// if (index === 0) {
-				// 	return;
-				// }
-
-				if (player.snake.x < bodyPart.x + bodyPart.width &&
-                    player.snake.x + bodyPart.width > bodyPart.x &&
-                    player.snake.y < bodyPart.y + bodyPart.height &&
-                    bodyPart.height + player.snake.y > bodyPart.y) {
-
-					this.removePlayerFromArray(i);
-
-                    io.emit('selfCollision', {playerId: player.id});
-				}
-			});
         })
     }
 }

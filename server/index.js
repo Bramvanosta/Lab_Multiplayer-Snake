@@ -58,5 +58,4 @@ setInterval(() => {
     board.moveSnakes(io);
     board.checkCollisionWithApples(io);
     board.checkCollisionWithSnakes(io);
-    board.checkCollisionWithSelf(io);
 }, config.DELAY);

@@ -74,8 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 let playerToMove = board.players.filter(player => {
                     return player.id === data.playerId;
                 });
-                playerToMove[0].snake.direction = data.direction;
-                playerToMove[0].snake.move();
+                playerToMove[0].snake.direction = data.snake.direction;
+                playerToMove[0].snake.move(data.snake);
             });
 
             game.on('snakeWithAppleCollision', data => {
@@ -103,28 +103,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
 
-            game.on('selfCollision', data => {
-                console.log('self collision');
-                board.players.forEach((player, index) => {
-                    if (player.id === data.id) {
-                        board.removePlayerFromArray(index);
-                        player.removeSnake();
-                        document.removeEventListener('keydown');
-                    }
-                });
-            });
-
             document.addEventListener('keydown', event => {
                 if (event.keyCode === 37 && localPlayer.snake.direction !== 'right') {
                     game.changeDirection(localPlayer.id, 'left');
                 }
-                else if (event.keyCode === 38 && localPlayer.direction !== 'down') {
+                else if (event.keyCode === 38 && localPlayer.snake.direction !== 'down') {
                     game.changeDirection(localPlayer.id, 'up');
                 }
-                else if (event.keyCode === 39 && localPlayer.direction !== 'left') {
+                else if (event.keyCode === 39 && localPlayer.snake.direction !== 'left') {
                     game.changeDirection(localPlayer.id, 'right');
                 }
-                else if (event.keyCode === 40 && localPlayer.direction !== 'up') {
+                else if (event.keyCode === 40 && localPlayer.snake.direction !== 'up') {
                     game.changeDirection(localPlayer.id, 'down');
                 }
             });
